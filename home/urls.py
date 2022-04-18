@@ -3,5 +3,5 @@ from home import views
 
 
 urlpatterns = [
-    path('home/', views.HomeTemplateView.as_view(), name='home')
+    path('', views.HomeTemplateView.as_view(), name='home')
 ]
