@@ -13,6 +13,7 @@ class PostCreateView(CreateView):
 
 
 class AllPostListView(ListView):
+    paginate_by = 3
     template_name = 'post/show-all-post.html'
     model = Post
     context_object_name = 'all_posts'

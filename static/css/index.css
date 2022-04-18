@@ -6,3 +6,7 @@ body {
 .wrapper {
     height: 87vh;
 }
+
+a {
+    text-decoration: none;
+}
