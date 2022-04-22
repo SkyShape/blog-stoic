@@ -10,3 +10,7 @@ body {
 a {
     text-decoration: none;
 }
+
+a.view:hover {
+    color: #e5dede;
+}
