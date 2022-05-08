@@ -13,9 +13,9 @@
                         {{ post.title }}
                     </div>
                     <div class="card-body">
-                        {{ post.description }}
+                        {{ post.description|safe }}
                     </div>
-                    <div class="card-footer d-flex">
+                    <div class="card-footer d-flex align-center">
                         <div class="dislike-like">
                             <div class="like-dislike d-flex justify-content-between" style="width:130px">
                                 <div class="like">
@@ -32,16 +32,27 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="comments btn btn-outline-primary mx-3">
+                            Comments 0
+                        </div>
                         <div class="delete col-md-4 offset-md-2">
                             {% if post.active is True %}
                                 <a href="{% url 'archive_post' post.id %}" class="btn btn-outline-info mx-2">Archive</a>
                             {% else %}
                                  <a href="{% url 'undo_archive_post' post.id %}" class="btn btn-outline-info mx-2">UndoArchive</a>
                             {% endif %}
-                            <a href="#" class="btn btn-outline-success mx-2">Edit</a>
+                            <a href="{% url 'update_post' post.id %}" class="btn btn-outline-success mx-2">Edit</a>
                         </div>
                     </div>
                 </div>
+                {% comment %} {% if post.comment %} {% endcomment %}
+                
+                {% include "comment/comment-card.html" %}
+                {% comment %} {% else %} {% endcomment %}
+                {% comment %} <div class="card">
+                    Create comment
+                </div> {% endcomment %}
+                {% comment %} {% endif %} {% endcomment %}
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy, reverse
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from post.forms import PostForm
-from post.models import Post
+from post.models import Post, Topic
 
 
 class PostCreateView(CreateView):
@@ -13,18 +13,30 @@ class PostCreateView(CreateView):
     success_url = reverse_lazy('show_all_posts')
 
 
-class AllPostListView(ListView):
-    paginate_by = 3
-    template_name = 'post/show-all-post.html'
+class PostUpdateView(UpdateView):
+    template_name = 'post/create-post.html'
     model = Post
-    context_object_name = 'all_posts'
+    form_class = PostForm
 
-    def get_queryset(self):
-        return Post.objects.filter(active=True)
+    def get_success_url(self):
+        return reverse('show_all_posts')
+
+
+class AllPostListView(ListView):
+    model = Post
+    template_name = 'post/show-all-post.html'
+    context_object_name = 'all_posts'
+    queryset = Post.objects.filter(active=True)
+    paginate_by = 3
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all_topics'] = Topic.objects.all()
+        return context
 
 
 class ArchivePostListView(ListView):
-    paginate_by = 3
+    paginate_by = 4
     template_name = 'post/show-arhive-pos.html'
     model = Post
     context_object_name = 'all_posts'
@@ -36,6 +48,12 @@ class ArchivePostListView(ListView):
 class PostDetailsView(DetailView):
     template_name = 'post/details-post.html'
     model = Post
+
+
+def all_topics(request):
+    topics = Topic.objects.all()
+    context = {'topics': topics}
+    return render(request, 'post/all_topics.html', context)
 
 
 def update_like(request, pk):

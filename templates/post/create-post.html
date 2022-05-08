@@ -7,18 +7,23 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-11 offset-md-1">
                 <div class="card mt-5">
                     <div class="card-header text-center text-muted" style="font-weight:700">
                         Create a new post
                     </div>
                     <form method="post">
                         {% csrf_token %}
-                        <div class="card-body">
+                        <div class="card-body mx-auto">
+                            {{ form.media }}
                             {{ form.as_p }}
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-primary mx-3">Create</button>
+                            {% if request.path != '/create-post/' %}
+                                <button type="submit" class="btn btn-primary mx-3">Edit</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-primary mx-3">Create</button>
+                            {% endif %}
                             <a href="{% url 'home' %}" class="btn btn-secondary mx-3">Cancel</a>
                         </div>
                     </form>

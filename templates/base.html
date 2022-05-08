@@ -8,12 +8,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/index.css' %}"> {% endcomment %}
     <script src="https://kit.fontawesome.com/84c84b2816.js" crossorigin="anonymous"></script>
 </head>
+<style>
+    body::-webkit-scrollbar { display: none;}
+
+    a {
+        text-decoration: none;
+    }
+
+    a.view:hover {
+        color: #e5dede;
+    }
+
+    .wrapper { min-height: 86vh;}
+
+    footer { 
+        width: 100%;
+        position: relative;
+        bottom: 0;
+    }
+    
+</style>
 <body>
     {% include 'navbar.html' %}
-    <div class="container-fluid wrapper overflow-hidden">
+    <div class="d-flex wrapper m-3">
         {% block content %}
         {% endblock %}
     </div>
