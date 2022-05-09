@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
@@ -48,12 +48,6 @@ class ArchivePostListView(ListView):
 class PostDetailsView(DetailView):
     template_name = 'post/details-post.html'
     model = Post
-
-
-def all_topics(request):
-    topics = Topic.objects.all()
-    context = {'topics': topics}
-    return render(request, 'post/all_topics.html', context)
 
 
 def update_like(request, pk):

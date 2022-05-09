@@ -12,5 +12,4 @@ urlpatterns = [
     path('details-post/<int:pk>/', views.PostDetailsView.as_view(), name='details_post'),
     path('update-like-post/<int:pk>/', views.update_like, name='update_like_post'),
     path('update-dislike-post/<int:pk>/', views.update_dislike, name='update_dislike_post'),
-    path('all-topics/', views.all_topics, name='topic'),
 ]
